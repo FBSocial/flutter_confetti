@@ -14,6 +14,7 @@ class ConfettiWidget extends StatefulWidget {
     this.numberOfParticles = 10,
     this.maxBlastForce = 20,
     this.minBlastForce = 5,
+    this.blastRange = 0,
     this.blastDirectionality = BlastDirectionality.directional,
     this.blastDirection = pi,
     this.gravity = 0.2,
@@ -53,6 +54,9 @@ class ConfettiWidget extends StatefulWidget {
   /// minimum blast force applied to a particle within it's first 5 frames of
   /// life. The default [minBlastForce] is set to `5`
   final double minBlastForce;
+
+  /// 角度偏移范围 [BlastDirectionality.explosive] 时生效
+  final double blastRange;
 
   /// The [blastDirectionality] is an enum that takes one of two
   /// values - directional or explosive.
@@ -171,7 +175,8 @@ class _ConfettiWidgetState extends State<ConfettiWidget>
         minimumSize: widget.minimumSize,
         maximumSize: widget.maximumSize,
         particleDrag: widget.particleDrag,
-        createParticlePath: widget.createParticlePath);
+        createParticlePath: widget.createParticlePath,
+        blastRange: widget.blastRange);
 
     _particleSystem.addListener(_particleSystemListener);
 

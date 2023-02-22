@@ -27,6 +27,7 @@ class ParticleSystem extends ChangeNotifier {
     required Size maximumSize,
     required double particleDrag,
     required double gravity,
+    required double blastRange,
     Path Function(Size size)? createParticlePath,
   })  : assert(maxBlastForce > 0 &&
             minBlastForce > 0 &&
@@ -55,7 +56,8 @@ class ParticleSystem extends ChangeNotifier {
         _maximumSize = maximumSize,
         _particleDrag = particleDrag,
         _rand = Random(),
-        _createParticlePath = createParticlePath;
+        _createParticlePath = createParticlePath,
+        _blastRange = blastRange;
 
   ParticleSystemStatus? _particleSystemStatus;
 
@@ -74,6 +76,7 @@ class ParticleSystem extends ChangeNotifier {
   final Size _minimumSize;
   final Size _maximumSize;
   final double _particleDrag;
+  final double _blastRange;
   final Path Function(Size size)? _createParticlePath;
 
   Offset? _particleSystemPosition;
@@ -170,8 +173,8 @@ class ParticleSystem extends ChangeNotifier {
             _gravity, _particleDrag, _createParticlePath));
   }
 
-  double get _randomBlastDirection =>
-      vmath.radians(Random().nextInt(359).toDouble());
+  double get _randomBlastDirection => Helper.randomize(
+      _blastDirection - _blastRange, _blastDirection + _blastRange);
 
   vmath.Vector2 _generateParticleForce() {
     var blastDirection = _blastDirection;
