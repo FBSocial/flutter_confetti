@@ -141,8 +141,8 @@ class ParticleSystem extends ChangeNotifier {
   }
 
   void _setScreenBorderPositions() {
-    _bottomBorder = _screenSize!.height * 1.1;
-    _rightBorder = _screenSize!.width * 1.1;
+    _bottomBorder = _screenSize!.height * 1.2;
+    _rightBorder = _screenSize!.width * 1.2;
     _leftBorder = _screenSize!.width - _rightBorder;
   }
 
